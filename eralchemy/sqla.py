@@ -14,7 +14,7 @@ if sys.version_info[0] == 3:
 def relation_to_intermediary(fk):
     """Transform an SQLAlchemy ForeignKey object to it's intermediary representation. """
     return Relation(
-        right_col=format_name(fk.parent.table.fullname),
+        right_col=format_name(fk.parent.table.name),
         left_col=format_name(fk._column_tokens[1]),
         right_cardinality='?',
         left_cardinality='*',
@@ -46,8 +46,8 @@ def column_to_intermediary(col, type_formatter=format_type):
 def table_to_intermediary(table):
     """Transform an SQLAlchemy Table object to it's intermediary representation. """
     return Table(
-        name=table.fullname,
-        columns=[column_to_intermediary(col) for col in table.c._data.values()]
+        name=table.name,
+        columns=[column_to_intermediary(col) for col in table.c.colset()]
     )
 
 
