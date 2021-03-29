@@ -49,7 +49,7 @@ def table_to_intermediary(table):
     """Transform an SQLAlchemy Table object to it's intermediary representation. """
     return Table(
         name=table.name,
-        columns=[column_to_intermediary(col) for col in table.c.colset()]
+        columns=[column_to_intermediary(col) for col in table.c._colset]
     )
 
 
