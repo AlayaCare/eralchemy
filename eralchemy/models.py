@@ -173,7 +173,8 @@ class Table(Drawable):
         return '[{}]'.format(self.name)
 
     def to_markdown(self):
-        return self.header_markdown + '\n' + '\n'.join(c.to_markdown() for c in self.columns)
+        return self.header_markdown + '\n' + '\n'.join(c.to_markdown() for c in
+                                                       self.columns_sorted)
 
     @property
     def columns_sorted(self):
@@ -184,7 +185,7 @@ class Table(Drawable):
         return ROW_TAGS.format('', '<B><FONT POINT-SIZE="16">{}</FONT></B>').format(self.name)
 
     def to_dot(self):
-        body = ''.join(c.to_dot() for c in self.columns)
+        body = ''.join(c.to_dot() for c in self.columns_sorted)
         return TABLE.format(self.name, self.header_dot, body)
 
     def __str__(self):
